@@ -17,8 +17,9 @@ services:
       - key: CLIENT_URL
         sync: false
 
-  - type: static
+  - type: web
     name: expensetracker-web
+    env: static
     rootDir: frontend/expense-tracker
     buildCommand: npm install && npm run build
     staticPublishPath: dist
