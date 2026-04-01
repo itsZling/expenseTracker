@@ -9,6 +9,7 @@ import AddIncomeForm from "../../components/Income/AddIncomeForm";
 import IncomeList from "../../components/Income/IncomeList";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import { toast } from "react-hot-toast";
+import moment from "moment";
 
 const Income = () => {
   useUserAuth();
@@ -46,6 +47,7 @@ const Income = () => {
   // Handle Add Income
   const handleAddIncome = async (income) => {
     const {source, amount, date, icon } = income;
+    const parsedDate = moment(date, "YYYY-MM-DD", true);
 
     // Validation Checks
     if (!source.trim()) {
@@ -63,11 +65,16 @@ const Income = () => {
       return;
     }
 
+    if (!parsedDate.isValid()) {
+      toast.error("Please select a valid date.");
+      return;
+    }
+
     try {
       await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
         source, 
         amount,
-        date,
+        date: parsedDate.toISOString(),
         icon
         });
 

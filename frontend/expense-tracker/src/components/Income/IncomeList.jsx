@@ -7,7 +7,7 @@ const IncomeList = ({ transactions, onDelete, onDownload }) => {
     return (
         <div className="card">
             <div className="flex items-center justify-between">
-                <h4 className="text-lg">Income Sources</h4>
+                <h4 className="text-lg dark:text-white">Income Sources</h4>
 
                 <button className="card-btn" onClick={onDownload}>
                     <LuDownload className="text-base" /> Download
@@ -20,7 +20,7 @@ const IncomeList = ({ transactions, onDelete, onDownload }) => {
                       key={income._id}
                       title={income.source}
                       icon={income.icon}
-                      date={moment(income.date).format("Do MMM YYYY")}
+                      date={moment(income.date).format("MM DD YYYY")}
                       amount={income.amount}
                       type="income"
                       onDelete={() => onDelete(income._id)}

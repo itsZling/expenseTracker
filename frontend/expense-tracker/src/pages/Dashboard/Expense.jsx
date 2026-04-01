@@ -9,6 +9,7 @@ import DeleteAlert from "../../components/layouts/DeleteAlert";
 import AddExpenseForm from "../../components/Expense/AddExpenseForm";
 import Modal from "../../components/layouts/Modal";
 import { toast } from "react-hot-toast";
+import moment from "moment";
 
 const Expense = () => {
   useUserAuth();
@@ -46,6 +47,7 @@ const Expense = () => {
   // Handle Add Expense
   const handleAddExpense = async (expense) => {
     const {category, amount, date, icon } = expense;
+    const parsedDate = moment(date, "YYYY-MM-DD", true);
 
     // Validation Checks
     if (!category.trim()) {
@@ -63,11 +65,16 @@ const Expense = () => {
       return;
     }
 
+    if (!parsedDate.isValid()) {
+      toast.error("Please select a valid date.");
+      return;
+    }
+
     try {
       await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, {
         category, 
         amount,
-        date,
+        date: parsedDate.toISOString(),
         icon
         });
 

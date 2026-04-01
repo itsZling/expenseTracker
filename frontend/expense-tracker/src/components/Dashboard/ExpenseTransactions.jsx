@@ -7,7 +7,7 @@ const ExpenseTransactions = ({transactions, onSeeMore}) => {
     return (
         <div className="card">
             <div className="flex items-center justify-between">
-                <h5 className="text-lg">Expenses</h5>
+                <h5 className="text-lg dark:text-white">Expenses</h5>
 
                 <button className="card-btn" onClick={onSeeMore}>
                     See All <LuArrowRight className="text-base"/>
@@ -20,7 +20,7 @@ const ExpenseTransactions = ({transactions, onSeeMore}) => {
                     key={expense._id}
                     title={expense.category}
                     icon={expense.icon}
-                    date={moment(expense.date).format("Do MMM YYYY")}
+                    date={moment(expense.date).format("MM DD YYYY")}
                     amount={expense.amount}
                     type="expense"
                     hideDeleteBtn

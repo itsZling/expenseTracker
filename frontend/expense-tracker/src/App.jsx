@@ -12,10 +12,12 @@ import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 import UserProvider from "./context/UserContext";
+import ThemeProvider from "./context/ThemeContext";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
+    <ThemeProvider>
     <UserProvider>
       <div>
         <Router>
@@ -39,6 +41,7 @@ const App = () => {
         }}
       />
     </UserProvider>
+    </ThemeProvider>
   )
 }
 
